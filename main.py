@@ -1,6 +1,5 @@
 import pygame
-from pygame.version import PygameVersion
-from constants import PLAYER_SHOOT_COOLDOWN, SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -38,6 +37,12 @@ def main():
             if asteroid.collisions(player):
                 print("Game Over!")
                 exit()
+
+        for asteroid in asteroids:
+            for s in shot:
+                if asteroid.collisions(s):
+                    asteroid.kill()
+                    s.kill()
 
         screen.fill("black")
         for sprite in drawable:
